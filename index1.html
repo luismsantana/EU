@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="estilos1.css" media="screen" />
+<style>
+		input[type=file]{
+			float:left;
+		}
+	</style>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="content">
+	<div id="leftnologin">
+	</div>
+
+	<div id="centernologin">
+		<div id="wrappertopnologin"></div>
+		<div id="wrappermiddlenologin" style="padding: 40px; padding-top: 50px;">
+		<h4 style="text-align:center">ALPHANUMERICS</h4>
+<form action="#">
+			
+			<p style="font-weight:bold">CSV FILE: </p>
+			<input type="file" class="input" id="csvfile" name="image" >
+			<button  id="submitCsv" class="btn btn-sm btn-success upload" style="margin-left:10px;" type="submit" disabled>Upload</button>
+			<button type="button" style="margin-left:10px;" class="btn btn-sm btn-danger cancel">Cancel</button>
+
+			<div class="progress progress-striped active" style="margin-top:10px;">
+				<div class="progress-bar" style="width:0%"></div>
+			</div>
+		</form>
+
+		<form action="#">
+			<p style="font-weight:bold">TXT FILE: </p>
+			<input type="file" id="txt1" class="input" name="image" >
+			<button id="submitTxt1" class="btn btn-sm btn-success upload" style="margin-left:10px;" type="submit" disabled>Upload</button>
+			<button type="button" style="margin-left:10px;" class="btn btn-sm btn-danger cancel">Cancel</button>
+
+			<div class="progress progress-striped active" style="margin-top:10px;">
+				<div class="progress-bar" style="width:0%"></div>
+			</div>
+		</form>
+
+		<br>
+		<h4 style="text-align:center">METADATA</h4>
+	
+		<form action="#">
+			<p style="font-weight:bold">SHAPE FILE: </p>
+
+			<input id="shape" class="input" type="file" name="image" >
+			<button id="submitshape" class="btn btn-sm btn-success upload" style="margin-left:10px;" type="submit" disabled>Upload</button>
+			<button type="button" style="margin-left:10px;" class="btn btn-sm btn-danger cancel">Cancel</button>
+
+			<div class="progress progress-striped active" style="margin-top:10px;">
+				<div class="progress-bar" style="width:0%"></div>
+			</div>
+		</form>
+
+		<form action="#">
+			<p style="font-weight:bold">TXT FILE: </p>
+			<input id="txt1" class="input" type="file" name="image" >
+			<button id="submitTxt2" class="btn btn-sm btn-success upload" style="margin-left:10px;" type="submit" disabled>Upload</button>
+			<button type="button" style="margin-left:10px;" class="btn btn-sm btn-danger cancel">Cancel</button>
+
+			<div class="progress progress-striped active" style="margin-top:10px;">
+				<div class="progress-bar" style="width:0%"></div>
+			</div>
+		</form>
+
+		<hr>
+
+		<button class="btn btn-sm btn-success upload-all" disabled>Upload All</button>
+		<button class="btn btn-sm btn-danger cancel-all">Cancel All</button>
+
+	</div><!-- end .container -->
+	<div id="wrapperbottomnologin"></div>
+	</div>
+		
+
+	</div>
+
+		<div id="rightnologin">
+			
+		</div>
+</div>
+
+
+	<script>
+
+		$('.upload-all').click(function(){
+			//submit all form
+			$('form').submit();
+		});
+		$('.cancel-all').click(function(){
+			//submit all form
+			$('form .cancel').click();
+		});
+
+		$(document).on('submit','form',function(e){
+
+			e.preventDefault();
+			$form = $(this);
+			uploadImage($form);
+		});
+
+		function uploadImage($form){
+			$form.find('.progress-bar').removeClass('progress-bar-success')
+										.removeClass('progress-bar-danger');
+			var formdata = new FormData($form[0]); //formelement
+			var request = new XMLHttpRequest();
+			//progress event...
+			request.upload.addEventListener('progress',function(e){
+				var percent = Math.round(e.loaded/e.total * 100);
+				console.log(percent);
+				$form.find('.progress-bar').width(percent+'%').html(percent+'%');
+			});
+			//progress completed load event
+			request.addEventListener('load',function(e){
+				$form.find('.progress-bar').addClass('progress-bar-success').html('upload completed....');
+			});
+			request.open('post', 'upload.php');
+			request.send(formdata);
+			$form.on('click','.cancel',function(){
+				request.abort();
+				$form.find('.progress-bar')
+					.addClass('progress-bar-danger')
+					.removeClass('progress-bar-success')
+					.html('upload aborted...');
+			});
+		}
+		//thanks for watching........
+		//code on git........
+		//subscribe, share, like, comment.............
+
+		$(".modal").modal({
+			'modal' : 'modal-window',
+			'close' : 'modal-close',
+			'closeText' : 'Close',
+			'shade' : 'modal-shade'
+		});
+
+		$(".input").change( function(){
+			
+           		$("#submitCsv").removeAttr('disabled');
+           		percent = 0;
+	        	$form.find('.progress-bar').width(percent+'%').html(percent+'%');
+            
+        });
+
+        /*$("#txt1").change( function(){
+			
+           		$("#submitTxt1").removeAttr('disabled');
+            
+        });
+
+        $("#shape").change( function(){
+			
+           		$("#submitshape").removeAttr('disabled');
+            
+        });
+
+     	$("#txt1").change( function(){
+			
+           		$("#submitTxt2").removeAttr('disabled');
+            
+        });*/
+
+        function reset_form_element (e) {
+		    e.wrap('<form>').parent('form').trigger('reset');
+		    e.unwrap();
+		}
+
+        $(".cancel").click(function(){
+        	$(".upload").attr('disabled', 'true');
+        	percent = 0;
+        	$form.find('.progress-bar').width(percent+'%').html(percent+'%');
+        	reset_form_element( $('.input') );
+    		e.preventDefault();
+        });
+
+
+	</script>
+</body>
+</html>

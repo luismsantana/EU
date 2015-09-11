@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>EuroHealthy</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="robots" content="index, follow" />
+	<meta charset="utf-8" />
+	<!-- // General meta information -->
+	
+	
+	<!-- Load Javascript -->
+	
+	<!-- // Load Javascipt -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<script src="js/modernizr.custom.63321.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script>
+	/*function _(el){
+		return document.getElementById(el);
+	}
+
+	function uploadFile(){
+		var file = _("file1").files[0];
+		var file1 = _("file2").files[0];
+		var file2 = _("file3").files[0];
+		var file3 = _("file4").files[0];
+		//console.log(file.name + " | " + file.size + " | " + file.type);
+		var formdata = new FormData();
+		formdata.append("file1", file);
+		formdata.append("file2", file);
+		formdata.append("file3", file);
+		formdata.append("file4", file);
+		var ajax = new XMLHttpRequest();
+		ajax.upload.addEventListener("progress", progressHandler, false);
+		ajax.addEventListener("load", completeHandler, false);
+		ajax.addEventListener("error", errorHandler, false);
+		ajax.addEventListener("abort", abortHandler, false);
+		ajax.open("POST", "upload.php");
+		ajax.send(formdata);
+	}
+
+	function progressHandler(event){
+		var percent = (event.loaded / event.total) * 100;
+		_("progress_bar").value = Math.round(percent);
+		_("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+
+	}
+
+	function completeHandler(event){
+		_("status").innerHTML = event.target.responseText;
+		_("progress_bar").value = 0;
+	}
+
+	function errorHandler(event){
+		_("status").innerHTML = "Upload Failed";
+	}
+
+	function abortHandler(event){
+		_("status").innerHTML = "Upload Aborted";
+	}
+*/
+	$("#upload_form").ajaxForm(function(){
+		
+	});
+
+	$("button").click(function(){
+		$("#progress_bar").show();
+	});
+
+	</script>
+<script src="main.js"></script>
+	<!-- Load stylesheets -->
+	<link type="text/css" rel="stylesheet" href="estilos1.css" media="screen" />
+
+</head>
+
+
+
+<body>
+<div id="content">
+	<div id="leftnologin">
+	</div>
+
+	<div id="centernologin">
+		<div id="wrappertopnologin"></div>
+		<div id="wrappermiddlenologin">
+			<h1>EuroHealthy</h1><br><br>
+			
+			<form action="upload.php" method="post" id="upload_form" enctype="multipart/form-data">
+				<input type="file" name="file1" id="file1"><br>
+				<input type="button" id="button1" class="btn btn-primary" value="Upload" onclick="uploadFile()">
+				<progress id="progress_bar1" value="0" max="100" style="display: none; width: 300px"> </progress>
+				<h3 id="status1"></h3>
+
+				<input type="file" name="file2" id="file2"><br>
+				<input type="button" id="button2" class="btn btn-primary" value="Upload" onclick="uploadFile()">
+				<progress id="progress_bar2" value="0" max="100" style="display: none; width: 300px"> </progress>
+				<h3 id="status2"></h3>
+
+				<input type="file" name="file3" id="file3"><br>
+				<input type="button" id="button3" class="btn btn-primary" value="Upload" onclick="uploadFile()">
+				<progress id="progress_bar3" value="0" max="100" style="display: none; width: 300px"> </progress>
+				<h3 id="status3"></h3>
+
+				<input type="file" name="file4" id="file4"><br>
+				<input type="button" class="btn btn-primary" id="button4" value="Upload" onclick="uploadFile()">
+				<progress id="progress_bar4" value="0" max="100" style="display: none; width: 300px"> </progress>
+				<h3 id="status4"></h3>
+
+			</form>
+
+		
+		</div>
+		<div id="wrapperbottomnologin"></div>
+
+	</div>
+
+	<div id="rightnologin">
+		
+	</div>
+</div>
+</body>
+</html>
