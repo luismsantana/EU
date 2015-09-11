@@ -30,7 +30,9 @@
 			<input type="file" class="input" id="csvfile" name="image" >
 			<button  id="submitcsv" class="btn btn-sm btn-success upload" style="margin-left:10px;" type="submit" disabled>Upload</button>
 			<button type="button" id="cancelcsv" style="margin-left:10px;" class="btn btn-sm btn-danger cancel">Cancel</button>
-
+                        <div id="erroextensao" style="display: none">The file has the wrong extension.</div>
+                        <div id="erroformato" style="display: none">The file wrong data.</div>
+                        
 			<div class="progress progress-striped active" style="margin-top:10px;">
 				<div class="progress-bar" id="barcsv" style="width:0%"></div>
 			</div>
